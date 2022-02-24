@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const Header: React.VFC = () => (
   <>
-    <div className="w-full absolute top-0">
+    <div className="w-full absolute top-0 pointer-events-none">
       <div className="bg-[#fff] h-[160px] md:h-[110px] lg:h-0" />
-      <div className="w-full h-[900px] relative">
+      <div className="w-full relative h-[900px]">
         <Image
           src="/header.svg"
           alt="header"
@@ -14,7 +14,7 @@ const Header: React.VFC = () => (
         />
       </div>
     </div>
-    <div className="absolute w-full top-[15vw] lg:top-[10vw] z-10">
+    <div className="absolute w-full top-[15vw] lg:top-[10vw]">
       <h1 className="w-full text-[42px] lg:text-[64px] font-bold mb-[7px] text-center tracking-wide">
         <span className="text-pointMain-100">H</span>iroto{" "}
         <span className="text-pointSub-100">B</span>log

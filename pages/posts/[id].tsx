@@ -1,3 +1,4 @@
+import PostLayout from "../../components/PostLayout";
 import { getAllPostIds, getPostData } from "../../lib/mdx";
 import { Post } from "../../types/post";
 
@@ -25,10 +26,14 @@ type Props = {
 const Post: React.VFC<Props> = ({ postData }) => {
   return (
     <>
-      <p>{postData.id}</p>
-      <p>{postData.author}</p>
-      <p>{postData.date}</p>
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <PostLayout>
+        <div className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
+          <p>{postData.id}</p>
+          <p>{postData.author}</p>
+          <p>{postData.date}</p>
+          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+        </div>
+      </PostLayout>
     </>
   );
 };
