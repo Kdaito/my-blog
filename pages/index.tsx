@@ -1,5 +1,5 @@
 import { getSortedPostsData } from "../lib/mdx";
-import { PostForList } from "../types/post";
+import { PostMetaWithId } from "../types/post";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -11,7 +11,7 @@ export async function getStaticProps() {
 }
 
 type Props = {
-  allPostsData: PostForList[];
+  allPostsData: PostMetaWithId[];
 };
 
 const Home: React.VFC<Props> = ({ allPostsData }) => {

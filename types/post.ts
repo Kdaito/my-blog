@@ -4,6 +4,10 @@ export type PostMeta = {
   author: string;
 };
 
-export type PostForList = PostMeta & {
+export type PostMetaWithId = PostMeta & {
   id: string;
+};
+
+export type Post = PostMetaWithId & {
+  contentHtml: string;
 };
