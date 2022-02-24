@@ -1,6 +1,7 @@
-import Layout from "../components/HomeLayout";
 import { getSortedPostsData } from "../lib/mdx";
 import { PostMetaWithId } from "../types/post";
+import Layout from "../components/HomeLayout";
+import PostCard from "../components/PostCard";
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
@@ -20,7 +21,12 @@ const Home: React.VFC<Props> = ({ allPostsData }) => {
     <>
       <Layout>
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[13px]">
-          {/* 投稿カードをマップする */}
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
         </div>
       </Layout>
     </>
