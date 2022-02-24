@@ -19,13 +19,9 @@ const Home: React.VFC<Props> = ({ allPostsData }) => {
   return (
     <>
       <Layout>
-        {/* {allPostsData.map((post) => (
-          <div key={post.id}>
-            <p>{post.title}</p>
-            <p>{post.author}</p>
-            <p>{post.date}</p>
-          </div>
-        ))} */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[13px]">
+          {/* 投稿カードをマップする */}
+        </div>
       </Layout>
     </>
   );
