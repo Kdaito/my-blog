@@ -14,7 +14,7 @@ const Header: React.VFC = () => (
         />
       </div>
     </div>
-    <div className="absolute w-full top-[15vw] lg:top-[10vw]">
+    <div className="absolute w-full top-[15vw] lg:top-[10vw] z-10">
       <h1 className="w-full text-[42px] lg:text-[64px] font-bold mb-[7px] text-center tracking-wide">
         <span className="text-pointMain-100">H</span>iroto{" "}
         <span className="text-pointSub-100">B</span>log
