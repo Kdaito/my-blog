@@ -2,6 +2,7 @@ export type PostMeta = {
   title: string;
   date: string;
   author: string;
+  discription: string;
 };
 
 export type PostMetaWithId = PostMeta & {

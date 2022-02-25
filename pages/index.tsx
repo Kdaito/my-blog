@@ -24,7 +24,7 @@ const Home: React.VFC<Props> = ({ allPostsData }) => {
           <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[13px]">
             {allPostsData.map((post) => (
               <div key={post.id}>
-                <PostCard id={post.id} />
+                <PostCard postMeta={post} />
               </div>
             ))}
           </div>
