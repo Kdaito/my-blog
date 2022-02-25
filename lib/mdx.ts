@@ -57,14 +57,11 @@ export const getPostData = async (id: string): Promise<Post> => {
 
   const matterResult = matter(fileContents);
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+  const content = matterResult.content;
 
   return {
     id,
-    contentHtml,
+    content,
     ...(matterResult.data as PostMeta),
   };
 };

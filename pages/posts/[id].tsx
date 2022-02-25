@@ -1,6 +1,20 @@
 import PostLayout from "../../components/PostLayout";
 import { getAllPostIds, getPostData } from "../../lib/mdx";
+import ReactMarkdown from "react-markdown";
 import { Post } from "../../types/post";
+import CodeBlock from "../../components/CodeBlock";
+import {
+  A,
+  BlockQuote,
+  H1,
+  H2,
+  H3,
+  HR,
+  LI,
+  OL,
+  P,
+  UL,
+} from "../../components/CustomElements";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -28,10 +42,22 @@ const Post: React.VFC<Props> = ({ postData }) => {
     <>
       <PostLayout>
         <div className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
-          <p>{postData.id}</p>
-          <p>{postData.author}</p>
-          <p>{postData.date}</p>
-          <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+          <ReactMarkdown
+            children={postData.content}
+            components={{
+              code: CodeBlock,
+              h1: H1,
+              h2: H2,
+              h3: H3,
+              p: P,
+              a: A,
+              ul: UL,
+              ol: OL,
+              li: LI,
+              hr: HR,
+              blockquote: BlockQuote,
+            }}
+          />
         </div>
       </PostLayout>
     </>

@@ -9,5 +9,5 @@ export type PostMetaWithId = PostMeta & {
 };
 
 export type Post = PostMetaWithId & {
-  contentHtml: string;
+  content: string;
 };
