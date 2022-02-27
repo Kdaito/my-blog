@@ -12,6 +12,7 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
     <SyntaxHighlighter
       style={dark}
       language={lang}
+      // eslint-disable-next-line react/no-children-prop
       children={String(children).replace(/\n$/, "")}
     />
   );

@@ -43,6 +43,7 @@ const Post: React.VFC<Props> = ({ postData }) => {
       <PostLayout>
         <div className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
           <ReactMarkdown
+            // eslint-disable-next-line react/no-children-prop
             children={postData.content}
             components={{
               code: CodeBlock,
