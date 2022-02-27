@@ -16,6 +16,7 @@ import {
   UL,
 } from "../../components/CustomElements";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -42,6 +43,13 @@ const Post: React.VFC<Props> = ({ postData }) => {
   const router = useRouter();
   return (
     <>
+      <Head>
+        <title>Hiroto Blog | {postData.title}</title>
+        <meta property="description" content={postData.discription} />
+        <meta property="og:title" content={`Hiroto Blog | ${postData.title}`} />
+        <meta property="og:description" content={postData.discription} />
+        {/* <meta property="og:image" content={data.thumbnailUrl} /> */}
+      </Head>
       <PostLayout>
         <div className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
           <ReactMarkdown
