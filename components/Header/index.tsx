@@ -11,6 +11,7 @@ const Header: React.VFC = () => (
           layout="fill"
           objectFit="contain"
           objectPosition="top"
+          priority
         />
       </div>
     </div>
