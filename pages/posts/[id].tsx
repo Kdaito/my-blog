@@ -15,6 +15,7 @@ import {
   P,
   UL,
 } from "../../components/CustomElements";
+import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -38,6 +39,7 @@ type Props = {
 };
 
 const Post: React.VFC<Props> = ({ postData }) => {
+  const router = useRouter();
   return (
     <>
       <PostLayout>
@@ -59,6 +61,14 @@ const Post: React.VFC<Props> = ({ postData }) => {
               blockquote: BlockQuote,
             }}
           />
+        </div>
+        <div className="flex items-center w-full justify-center py-[65px]">
+          <button
+            className="bg-pointMain-100 hover:bg-pointMain-200 text-[#fff] font-medium text-[21px] px-[22px] py-[10px] rounded-[5px]"
+            onClick={() => router.push("/")}
+          >
+            一覧に戻る
+          </button>
         </div>
       </PostLayout>
     </>
