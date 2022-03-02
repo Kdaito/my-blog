@@ -1,0 +1,102 @@
+---
+title: Macにphpをインストールする
+date: "2022-02-28"
+author: 小林大斗
+discription: 現在Laravelをちまちまと勉強しているのですが、phpをインストールする際に少しだけつまづいたのでこの場を借りて共有しようと思います。
+---
+
+元々 windows PC で laravel をいじっていたのですが、それも一年前の話で、現在では mac book を使っています。最近また laravel を使用する機会ができたので、php をインストールしました。ちなみに、その機会というのは、planet-scale というサーバーレス DB を使ってみたいというもので、laravel と組み合わせて使うチュートリアルを公式が出していたので、また「laravel やらなくちゃ！」となったわけです。チュートリアルが終わったら、そちらの方の記事も書いてみたいと思います\
+前置きが長くなりました。ごめんなさい。
+
+結論から言うと mac にはデフォルトで php がインストールされているので新たに path を通してあげる必要がありました。というお話です。
+
+## 環境
+
+- macOS Big Sur(version 11.2.3)
+- homebrew 3.4.0
+- 今回インストールする php 8.0
+
+## homebrew で php をインストールする
+
+```
+brew search php
+```
+
+インストールできる php が表示されるので選んでインストール
+
+```
+brew install php@8.0
+```
+
+インストールできたか確かめる
+
+```
+php -v
+```
+
+出力結果
+
+```
+WARNING: PHP is not recommended
+PHP is included in macOS for compatibility with legacy software.
+Future versions of macOS will not include PHP.
+PHP 7.3.24-(to be removed in future macOS) (cli) (built: Dec 21 2020 21:33:25) ( NTS )
+Copyright (c) 1997-2018 The PHP Group
+Zend Engine v3.3.24, Copyright (c) 1998-2018 Zend Technologies
+```
+
+という警告文が出る。
+
+path を確かめてみる
+
+```
+which php
+```
+
+出力結果
+
+```
+/usr/bin/php
+```
+
+これはデフォルトで mac に存在する php を指しており、先ほどインストールした php の path ではない。
+
+8.0 をインストールしたのにも関わらず、いまだにデフォルトの php を指してしまっており、このデフォルトの php が将来的に使えなくなるよ的な警告文だと思われます。
+なのでデフォルトからインストールした php へと path をなおしてあげます！
+
+```
+echo 'export PATH="/usr/local/opt/php@8.0/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/php@8.0/sbin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+path を再確認してみましょう！
+
+```
+which php
+```
+
+出力結果
+
+```
+/usr/local/opt/php@8.0/bin/php
+```
+
+インストールしたphp@8.0へと path が変わったことがわかりますね！
+
+```
+php -v
+```
+
+出力結果
+
+```
+PHP 8.0.16 (cli) (built: Feb 18 2022 09:29:31) ( NTS )
+Copyright (c) The PHP Group
+Zend Engine v4.0.16, Copyright (c) Zend Technologies
+    with Zend OPcache v8.0.16, Copyright (c), by Zend Technologies
+```
+
+しっかりバージョン 8.0 系が使われていますね！成功です！
+
+ありがとうございました！

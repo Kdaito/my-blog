@@ -1,0 +1,63 @@
+---
+title: Next.jsでブログを作る
+date: "2022-02-27"
+author: 小林大斗
+discription: 2つ目の記事は、このブログを作るにあたってNext.jsを使用したのでその感想を書いていこうと思います。
+---
+
+タイトルにもある通り、このブログは Next.js で作られています。Next.js を使ったのは初めてだったので、ドキュメントをみながら試行錯誤して完成させました。この記事は「Next.js って聞いたことあるけど、なんなの？」っていう人向けの記事です。
+
+## Next.js とは
+
+Next.js とは、javascript のライブラリである React をベースにしたフロントエンドのフレームワークです。実際に Next.js を使っていていいなと思った点を少しだけ紹介します。
+
+- Pre-rendering
+- ファイルベースルーティング
+- 画像最適化
+
+これらの点についてざっと解説していきます。
+
+## Pre-rendering
+
+公式ドキュメントの該当ページの冒頭には以下のように書かれています。
+
+> By default, Next.js pre-renders every page. This means that Next.js generates HTML for each page in advance, instead of having it all done by client-side JavaScript. Pre-rendering can result in better performance and SEO.
+
+Pre-rendering では、アプリケーションを事前にページ単位でレンダリングします。そのため、一つの膨大な javascript ファイルを生成する React などの SPA に比べて、ページ読み込み時のファイルサイズを削減することができます。またページ単位で HTML が作成されることで、結果としてより良い SEO パフォーマンスにつながります。\
+[公式ドキュメント pre-rendering](https://nextjs.org/docs/basic-features/pages#pre-rendering)
+
+## ファイルベースルーティング
+
+Next.js では pages ディレクトリ配下のファイル構成がそのままルーティングとして使用されます。
+
+```
+`pages/index.js` → `/`
+`pages/blog/index.js` → `/blog`
+```
+
+以上のようにルーティングが設定されます。なので React や Vue の時のような複雑なルーティングを設定する必要もなく、すっきりしていてわかりやすい気がします。また、動的ルーティングにも対応しています。詳しくはドキュメントを読んでみてください。\
+[公式ドキュメント routing](https://nextjs.org/docs/routing/introduction)
+
+## 画像最適化
+
+Next.js では Next 側が用意してくれている Image コンポーネントがあり、それを使用すると、サイズに合わせて自動で画像をトリミングしてくれたり、遅延ロードを設定できたりします。
+
+```js
+import Image from "next/image";
+
+const MyImage: React.VFC = () => {
+  return (
+    <div className="w-[100px] h-[100px] relative">
+      <Image src="/icon.jpg" alt="author icon" layout="fill" />
+    </div>
+  );
+};
+```
+
+実際の使用例です。layout="fill"を設定すると、親要素の div に合わせて自動的にサイズをトリミングして表示してくれます。画像の設定って結構めんどくさいのですごい便利だなと思いました。あとこのやり方だとレスポンシブ対応もしやすいです！\
+[公式ドキュメント next/images](https://nextjs.org/docs/api-reference/next/image)
+
+## 最後に
+
+ここまでざっと説明してきましたが、やはり実際に使ってみてより理解が深まると思います！公式ドキュメントにはチュートリアルがありますが、それが大変わかりやすくて楽しいので是非やってみてください！チュートリアルを丁寧に進めていけば終わった頃には Next.js への理解は深まっていると思います！\
+[公式ドキュメント チュートリアル](https://nextjs.org/learn/foundations/about-nextjs)
