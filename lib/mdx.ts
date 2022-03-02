@@ -5,7 +5,7 @@ import { PostMetaWithId, PostMeta, Post } from "../types/post";
 import { remark } from "remark";
 import html from "remark-html";
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const postsDirectory = path.join(process.cwd(), "posts/");
 
 // 一覧用の投稿のidをpathから取得する
 export const getAllPostIds = () => {
@@ -20,7 +20,7 @@ export const getAllPostIds = () => {
 // 一覧用のデータを取得する
 export const getSortedPostsData = () => {
   // 投稿が保存されているディレクトリから全てのファイルを読み取る
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = fs.readdirSync(postsDirectory).filter(f => f.endsWith('mdx'));
 
   const allPostsData: PostMetaWithId[] = fileNames.map((fileName) => {
     // ファイル名を取り出す(拡張子を外す)
