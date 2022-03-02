@@ -9,7 +9,7 @@ const PostCard: React.VFC<Props> = ({ postMeta }) => {
   const router = useRouter();
   return (
     <button
-      className="w-full h-[300px] text-left rounded-sm hover:scale-105 transition-all"
+      className="w-full h-[300px] text-left rounded-sm lg:hover:scale-105 transition-all"
       onClick={() => router.push(`/posts/${postMeta.id}`)}
     >
       <div className="w-full h-full bg-[#fff] rounded-sm p-[15px]">
