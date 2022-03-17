@@ -19,7 +19,7 @@ const Pagination: React.VFC<PaginationProps> = ({ currentPage, totalPage }) => {
     router.push(`/${currentPage + 1}`);
   }, [currentPage, router]);
   const onClickPrevious = useCallback(() => {
-    router.push(`/${currentPage - 1}`);
+    router.push(`/${currentPage - 1 > 1 ? currentPage - 1 : ""}`);
   }, [currentPage, router]);
 
   return (
