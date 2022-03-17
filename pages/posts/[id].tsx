@@ -35,11 +35,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
   };
 }
 
-type Props = {
-  postData: Post;
-};
-
-const Post: React.VFC<Props> = ({ postData }) => {
+const Post = ({ postData }: { postData: Post }) => {
   const router = useRouter();
   return (
     <>
