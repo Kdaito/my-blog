@@ -2,8 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { PostMetaWithId, PostMeta, Post } from "../types/post";
-import { remark } from "remark";
-import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts/");
 
@@ -20,7 +18,9 @@ export const getAllPostIds = () => {
 // 一覧用のデータを取得する
 export const getSortedPostsData = () => {
   // 投稿が保存されているディレクトリから全てのファイルを読み取る
-  const fileNames = fs.readdirSync(postsDirectory).filter(f => f.endsWith('mdx'));
+  const fileNames = fs
+    .readdirSync(postsDirectory)
+    .filter((f) => f.endsWith("mdx"));
 
   const allPostsData: PostMetaWithId[] = fileNames.map((fileName) => {
     // ファイル名を取り出す(拡張子を外す)
@@ -39,15 +39,20 @@ export const getSortedPostsData = () => {
     };
   });
 
-  return allPostsData.sort(({ date: a, date: b }) => {
-    if (a < b) {
+  // 日付が新しい投稿が上にくるようにソートする
+  allPostsData.sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    if (dateA < dateB) {
       return 1;
-    } else if (a > b) {
+    } else if (dateA > dateB) {
       return -1;
     } else {
       return 0;
     }
   });
+
+  return allPostsData;
 };
 
 // 個別画面用のデータを取得する
