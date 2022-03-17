@@ -44,7 +44,6 @@ const Post = ({ postData }: { postData: Post }) => {
         <meta property="description" content={postData.discription} />
         <meta property="og:title" content={`Hiroto Blog | ${postData.title}`} />
         <meta property="og:description" content={postData.discription} />
-        {/* <meta property="og:image" content={data.thumbnailUrl} /> */}
       </Head>
       <PostLayout>
         <div className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
