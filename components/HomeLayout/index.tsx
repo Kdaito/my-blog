@@ -19,7 +19,6 @@ const Layout: React.VFC<Props> = ({ children }) => (
         property="og:description"
         content="名古屋出身の大学生によるブログです。文系大学に通う傍ら、webエンジニアを目指して勉強中です。現在は東京の自社開発企業で長期インターン生として勉強させてもらっています。"
       />
-      {/* <meta property="og:image" content={data.thumbnailUrl} /> */}
     </Head>
     <div className="w-screen">
       <Header />
