@@ -5,7 +5,7 @@ import { DISPLAY_COUNT } from "../../pages";
 export const getBlogs = async (offset: number): Promise<BlogCMSResponse> => {
   const blogs = await client.get<BlogCMSResponse>({
     endpoint: "blogs",
-    queries: { limit: DISPLAY_COUNT, offset },
+    queries: { limit: DISPLAY_COUNT, offset, orders: "-publishedAt" },
   });
   return blogs;
 };

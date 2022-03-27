@@ -18,7 +18,7 @@ export async function getStaticProps() {
   allPosts.push(contents);
   //  DISPLAY_COUNT件ずつ取得する。
   for (let i = 1; i < totalPage; i++) {
-    const cmsResponse = await getBlogs(i * 8);
+    const cmsResponse = await getBlogs(i * DISPLAY_COUNT);
     allPosts.push(cmsResponse.contents);
   }
   return {
@@ -32,10 +32,12 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   allPosts,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+
   const displayPosts: Blog[] = useMemo(
     () => allPosts[currentPage - 1],
     [allPosts, currentPage]
   );
+
   const onClickNext = useCallback(
     () => setCurrentPage(currentPage + 1),
     [currentPage]
@@ -44,6 +46,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     () => setCurrentPage(currentPage - 1),
     [currentPage]
   );
+
   return (
     <>
       <Layout>
