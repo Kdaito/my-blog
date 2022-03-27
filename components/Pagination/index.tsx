@@ -1,26 +1,23 @@
-import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 export type PaginationProps = {
   currentPage: number;
   totalPage: number;
+  onClickNext: () => void;
+  onClickPrevious: () => void;
 };
 
-const Pagination: React.VFC<PaginationProps> = ({ currentPage, totalPage }) => {
-  const router = useRouter();
-
+const Pagination: React.VFC<PaginationProps> = ({
+  currentPage,
+  totalPage,
+  onClickNext,
+  onClickPrevious,
+}) => {
   const isExistPrevious = useMemo(() => currentPage - 1 > 0, [currentPage]);
   const isExistNext = useMemo(
     () => currentPage < totalPage,
     [currentPage, totalPage]
   );
-
-  const onClickNext = useCallback(() => {
-    router.push(`/${currentPage + 1}`);
-  }, [currentPage, router]);
-  const onClickPrevious = useCallback(() => {
-    router.push(`/${currentPage - 1 > 1 ? currentPage - 1 : ""}`);
-  }, [currentPage, router]);
 
   return (
     <div className="flex items-center justify-center mt-[50px] h-[40px]">

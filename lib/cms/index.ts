@@ -1,5 +1,13 @@
+import { BlogCMSResponse } from "../../types/post";
 import { client } from "./client";
 
-export const getBlog = () => {
-  client.get({ endpoint: "blogs" }).then((res) => console.log(res));
+export const getBlogs = async (
+  limit: number,
+  offset: number
+): Promise<BlogCMSResponse> => {
+  const blogs = await client.get<BlogCMSResponse>({
+    endpoint: "blogs",
+    queries: { limit, offset },
+  });
+  return blogs;
 };
