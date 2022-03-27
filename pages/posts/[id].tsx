@@ -1,76 +1,61 @@
-import PostLayout from "../../components/PostLayout";
-import { getAllPostIds, getPostData } from "../../lib/mdx";
-import ReactMarkdown from "react-markdown";
-import { Post } from "../../types/post";
-import CodeBlock from "../../components/CodeBlock";
-import {
-  A,
-  BlockQuote,
-  H1,
-  H2,
-  H3,
-  HR,
-  LI,
-  OL,
-  P,
-  UL,
-} from "../../components/CustomElements";
-import { useRouter } from "next/router";
+import { GetStaticPropsContext, InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useCallback } from "react";
+import { getAllBlogIds, getBlog } from "../../lib/cms";
+import PostLayout from "../../components/PostLayout";
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds();
+  const paths = await getAllBlogIds();
   return {
     paths,
     fallback: false,
   };
 }
 
-export async function getStaticProps({ params }: { params: { id: string } }) {
-  const postData = await getPostData(params.id);
+export async function getStaticProps(
+  context: GetStaticPropsContext<{ id: string }>
+) {
+  const blog = await getBlog(context.params!.id);
   return {
     props: {
-      postData,
+      blog,
     },
   };
 }
 
-const Post = ({ postData }: { postData: Post }) => {
+const Blog: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
+  blog,
+}) => {
   const router = useRouter();
+  const onClickButton = useCallback(() => router.push("/"), [router]);
   return (
     <>
       <Head>
-        <title>Hiroto Blog | {postData.title}</title>
-        <meta property="description" content={postData.discription} />
-        <meta property="og:title" content={`Hiroto Blog | ${postData.title}`} />
-        <meta property="og:description" content={postData.discription} />
+        <title>Hiroto Blog | {blog.title}</title>
+        <meta property="description" content={blog.summary} />
+        <meta property="og:title" content={`Hiroto Blog | ${blog.title}`} />
+        <meta property="og:description" content={blog.summary} />
       </Head>
       <PostLayout>
-        <div className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
-          <H1>{postData.title}</H1>
-          <P>{postData.discription}</P>
-          <ReactMarkdown
-            // eslint-disable-next-line react/no-children-prop
-            children={postData.content}
-            components={{
-              code: CodeBlock,
-              h1: H1,
-              h2: H2,
-              h3: H3,
-              p: P,
-              a: A,
-              ul: UL,
-              ol: OL,
-              li: LI,
-              hr: HR,
-              blockquote: BlockQuote,
+        <article className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
+          <h1 className="text-[17px] md:text-[32px] font-bold mt-[20px] my-[35px] shadow-md px-[10px] py-[12px] border-l-[5px] border-pointMain-100 rounded-sm">
+            {blog.title}
+          </h1>
+          <p className="text-[13px] md:text-[16px] leading-7 md:leading-8 tracking-wide my-[20px]">
+            {blog.summary}
+          </p>
+          <div
+            className="prose"
+            dangerouslySetInnerHTML={{
+              __html: `${blog.content}`,
             }}
           />
-        </div>
+        </article>
         <div className="flex items-center w-full justify-center py-[65px]">
           <button
             className="bg-pointMain-100 hover:bg-pointMain-200 text-[#fff] font-medium text-[21px] px-[22px] py-[10px] rounded-[5px]"
-            onClick={() => router.push("/")}
+            onClick={onClickButton}
           >
             一覧に戻る
           </button>
@@ -80,4 +65,4 @@ const Post = ({ postData }: { postData: Post }) => {
   );
 };
 
-export default Post;
+export default Blog;

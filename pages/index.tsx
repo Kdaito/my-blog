@@ -12,14 +12,13 @@ export async function getStaticProps() {
   // 二限配列を生成
   const allPosts: Blog[][] = [];
   // DISPLAY_COUNT件ずつ取得する。最初の一回でtotalCountを取得し、何回cmsから取得すれば良いかを計算する
-  const cmsFirstResponse = await getBlogs(DISPLAY_COUNT, 0);
+  const cmsFirstResponse = await getBlogs(0);
   const { contents, totalCount } = cmsFirstResponse;
   const totalPage = Math.ceil(totalCount / DISPLAY_COUNT);
   allPosts.push(contents);
   //  DISPLAY_COUNT件ずつ取得する。
   for (let i = 1; i < totalPage; i++) {
-    console.log("yobidashifor");
-    const cmsResponse = await getBlogs(DISPLAY_COUNT, i * 8);
+    const cmsResponse = await getBlogs(i * 8);
     allPosts.push(cmsResponse.contents);
   }
   return {
