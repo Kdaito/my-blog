@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useCallback } from "react";
 import { getAllBlogIds, getBlog } from "../../lib/cms";
 import PostLayout from "../../components/PostLayout";
+import { formatDate } from "../../lib/date";
 
 export async function getStaticPaths() {
   const paths = await getAllBlogIds();
@@ -42,6 +43,10 @@ const Blog: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <h1 className="text-[17px] md:text-[32px] font-bold mt-[20px] my-[35px] shadow-md px-[10px] py-[12px] border-l-[5px] border-pointMain-100 rounded-sm">
             {blog.title}
           </h1>
+          <div className="text-[#999] pb-[10px]">
+            <p>著者: {blog.author}</p>
+            <p>公開日: {formatDate(blog.publishedAt)}</p>
+          </div>
           <p className="text-[13px] md:text-[16px] leading-7 md:leading-8 tracking-wide my-[20px]">
             {blog.summary}
           </p>
