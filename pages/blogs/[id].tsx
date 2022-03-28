@@ -5,7 +5,9 @@ import { useCallback } from "react";
 import { getAllBlogIds, getBlog } from "../../lib/cms";
 import PostLayout from "../../components/PostLayout";
 import { formatDate } from "../../lib/date";
-import 'highlight.js/styles/github-dark.css';
+import { FaRegUser } from "react-icons/fa";
+import { BiTimeFive } from "react-icons/bi";
+import "highlight.js/styles/github-dark.css";
 
 export async function getStaticPaths() {
   const paths = await getAllBlogIds();
@@ -40,13 +42,19 @@ const Blog: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <meta property="og:description" content={blog.summary} />
       </Head>
       <PostLayout>
-        <article className="bg-[#fff] px-[30px] py-[40px] rounded-sm">
+        <article className="bg-[#fff] px-[15px] md:px-[30px] pt-[10px] pb-[40px] rounded-sm">
           <h1 className="text-[17px] md:text-[32px] font-bold mt-[20px] my-[35px] shadow-md px-[10px] py-[12px] border-l-[5px] border-pointMain-100 rounded-sm">
             {blog.title}
           </h1>
-          <div className="text-[#999] pb-[10px]">
-            <p>著者: {blog.author}</p>
-            <p>公開日: {formatDate(blog.publishedAt)}</p>
+          <div className="flex items-center gap-[15px] my-[10px] text-[14px] md:text-[16px] text-[#5e5e5e]">
+            <p className="flex items-center gap-[3px]">
+              <BiTimeFive />
+              {formatDate(blog.publishedAt)}
+            </p>
+            <p className="flex items-center gap-[3px]">
+              <FaRegUser />
+              {blog.author}
+            </p>
           </div>
           <p className="text-[13px] md:text-[16px] leading-7 md:leading-8 tracking-wide my-[20px]">
             {blog.summary}

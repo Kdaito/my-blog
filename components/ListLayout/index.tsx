@@ -6,7 +6,7 @@ type Props = {
 };
 
 const ListLayout: React.VFC<Props> = ({ displayPosts }) => (
-  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[13px]">
+  <div className="w-full flex flex-col gap-[20px]">
     {displayPosts.map((post) => (
       <div key={post.id}>
         <PostCard post={post} />
