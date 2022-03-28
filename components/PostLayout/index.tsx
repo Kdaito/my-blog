@@ -20,7 +20,7 @@ const PostLayout: React.VFC<Props> = ({ children }) => {
             </button>
           </div>
         </div>
-        <div className="mt-[100px]">
+        <div className="mt-[50px]">
           <MainLayout>{children}</MainLayout>
         </div>
       </div>

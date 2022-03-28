@@ -1,15 +1,15 @@
-import { Post, PostMetaWithId } from "../../types/post";
+import { Blog } from "../../types/post";
 import PostCard from "../PostCard";
 
 type Props = {
-  displayPosts: PostMetaWithId[];
+  displayPosts: Blog[];
 };
 
 const ListLayout: React.VFC<Props> = ({ displayPosts }) => (
-  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-[13px]">
+  <div className="w-full flex flex-col gap-[20px]">
     {displayPosts.map((post) => (
       <div key={post.id}>
-        <PostCard postMeta={post} />
+        <PostCard post={post} />
       </div>
     ))}
   </div>
