@@ -1,6 +1,8 @@
 import { Blog, BlogCMSResponse } from "../../types/post";
 import { client } from "./client";
 import { DISPLAY_COUNT } from "../../pages";
+import { load } from "cheerio";
+import hljs from "highlight.js";
 
 export const getBlogs = async (offset: number): Promise<BlogCMSResponse> => {
   const blogs = await client.get<BlogCMSResponse>({
@@ -42,5 +44,15 @@ export const getBlog = async (id: string): Promise<Blog> => {
     endpoint: "blogs",
     contentId: id,
   });
-  return blog;
+  // シンタックスハイライト
+  const $ = load(blog.content);
+  $("pre code").each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass("hljs");
+  });
+  return {
+    ...blog,
+    content: $.html(),
+  };
 };

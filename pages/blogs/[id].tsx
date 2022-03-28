@@ -5,6 +5,7 @@ import { useCallback } from "react";
 import { getAllBlogIds, getBlog } from "../../lib/cms";
 import PostLayout from "../../components/PostLayout";
 import { formatDate } from "../../lib/date";
+import 'highlight.js/styles/github-dark.css';
 
 export async function getStaticPaths() {
   const paths = await getAllBlogIds();
